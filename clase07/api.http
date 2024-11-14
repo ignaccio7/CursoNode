@@ -1,0 +1,24 @@
+### GET INICIO
+GET http://localhost:3000/
+
+### GET LOGIN
+GET http://localhost:3000/login
+
+
+### POST REGISTER
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "username":"nirodev",
+  "password":"12345"
+}
+
+### POST LOGIN
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username":"nirodev",
+  "password":"12345"
+}

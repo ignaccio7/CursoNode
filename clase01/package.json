@@ -1,0 +1,17 @@
+{
+  "name": "clase01",
+  "version": "1.0.0",
+  "description": "Primeros pasos con node",
+  "main": "1.os-info.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "nirg",
+  "license": "ISC",
+  "dependencies": {
+    "picocolors": "^1.0.0"
+  }
+}

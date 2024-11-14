@@ -1,0 +1,11 @@
+ID con inyeccion de dependencias
+se usa para aumentar la eficiancia del codigo
+la idea es que un objeto una clase o una funcion
+recibe sus dependencias desde fuera
+y el comportamiento cambia dependiendo de como se le pasa
+la informacion y nos facilita mucho
+te mejora en reutilizacion y el control del codigo
+
+lo mejor de esto es que solo se importa la aplicaion y desde fuera lo podremos testear
+ya que podemos enviar diferentes modelos inyectandoles desde afuera
+ya que hay veces que pueden cambiar modelos por x motivo la version el precio etc

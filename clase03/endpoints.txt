@@ -1,0 +1,90 @@
+GET
+
+// recuperar todas las peliculas
+http://localhost:1234/movies
+
+// recuperar una pelicula por id
+http://localhost:1234/movies/1 --> not found
+http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+// recuperar todas las peliculas por un género
+http://localhost:1234/movies?genre=DRAMA
+http://localhost:1234/movies?genre=drama
+http://localhost:1234/movies?genre=Drama
+
+
+//para instalar express 
+npm install express -E
+//para instalar zod para las validaciones
+npm install zod -E
+
+
+para saber la diferencia entre post put y patch
+hay que entender
+Idempotencia
+Propiedad de realizar una accion determinada varias veces
+y aun asi conseguir siempre el mismo resultado que se 
+obtendra al hacerlo una vez
+asi el proposito de estos casos hay que entender
+POST --> Crear un nuevo elemento/recurso en el servidor ---- /movies
+PUT --> Actualizar totalmente un elemento ya existente o crearlo sino existe ---- /movies/123-321
+PATCH --> Actualizar parcialmente un recurso ---- /movies/123-321
+
+post no es idempotente. no porque creas siempre un nuevo recurso
+put si es idempotente. el resultado siempre sera el mismo
+patch normalmente si pero depende del contexto
+
+
+-->Para probar el cors crearemos una web para probar la api
+CORS
+cross origin resource sharing
+cuando probamos del navegador hay error porque dentro de servidores restringe si ese recurso puedes utilizar en un origen. 
+Entonces es un mecanismo que restringe si un recurso se pueda utilizar en un origen o si lo pueden usar en otro segun el dominio esto se lo puede ver en los navegadores.
+
+si probamos curl http://localhost:1234/movies funciona correctamente
+
+--> EL PROBLEMA DEL CORS SE PODRIA ARREGLAR CON UN MIDDLEWARE
+instalando 
+npm install cors -E
+
+!!!!IMPORTANTE 
+PARA SUBIR EL PROYECTO
+https://www.fl0.com/pricing
+añadimos este script en el package json en los scripts
+"start": "node app.js"
+
+//NOTA PARA PASAR UN PROYECTO QUE USE COMMONJS y EcmaScript Modules
+en el package.json deberiamos cambiar
+por defecto no se anota pero hay una especificacion que puede estar o no que es
+"name":.....,
+"type":"commonjs",
+asi esto lo cambiamos a 
+"type":"module",
+
+y cuando queramos hacer correr el proyecto nos tropezaremos conque no podemos usar require 
+asi lo cambiamos y otro problema es que debemos especificar las extensiones
+ya que CommonJs utiliza por detras resolver que va probando multiples extensiones
+en EcmaScriptModules debemos especificar la extension
+--> otro problema que nos dara es con esta linea
+
+const movies = require('./movies.json')
+
+esto si nosotros intentamos pasar a
+import movies from './movies.json' -> dara un error porque para leer un archivo json se puede solo con CommonJS
+
+lo que se podria hacer una forma es
+import fs = from 'node:fs'
+const movies = JSON.parse(fs.readFileSync('./movies.json','utf-8'))
+
+ahora una recomendad se podria hacer creando nuestro propio import
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url) //con esto obtendriamos la direccion de nuestro proyecto y ya podriamos utilizar el requira nativo de Node
+const movies = require('./movies.json')
+AHORA SI QUE FUNCIONARIA EL require
+
+EN EL FUTURO el import del json sera
+import movies from './movies.json' with { type:'json' }
+https://github.com/tc39/proposal-import-attributes
+
+TODO ESTO Y UN POCO MAS DE REFACTORIZACION LO HAREMOS EN LA clase04 
+viendo que es mvc tambien
